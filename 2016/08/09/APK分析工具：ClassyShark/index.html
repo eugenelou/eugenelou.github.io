@@ -4,17 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Tag: android studio | Eugene&#39;s blog</title>
+  <title>APK分析工具：ClassyShark | Eugene&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Eugene's blog">
-<meta property="og:url" content="http://yring.cn/tags/android-studio/index.html">
+  <meta name="description" content="ClassyShark是一款可以查看Android可执行文件的浏览工具，支持APK,Aar,So,Dex,Jar,Class等文件.另外还统计了方法数量，dex数量，引用的动态库…">
+<meta property="og:type" content="article">
+<meta property="og:title" content="APK分析工具：ClassyShark">
+<meta property="og:url" content="http://yring.cn/2016/08/09/APK分析工具：ClassyShark/index.html">
 <meta property="og:site_name" content="Eugene's blog">
-<meta property="og:description">
+<meta property="og:description" content="ClassyShark是一款可以查看Android可执行文件的浏览工具，支持APK,Aar,So,Dex,Jar,Class等文件.另外还统计了方法数量，dex数量，引用的动态库…">
+<meta property="og:updated_time" content="2016-08-09T07:30:50.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Eugene's blog">
-<meta name="twitter:description">
+<meta name="twitter:title" content="APK分析工具：ClassyShark">
+<meta name="twitter:description" content="ClassyShark是一款可以查看Android可执行文件的浏览工具，支持APK,Aar,So,Dex,Jar,Class等文件.另外还统计了方法数量，dex数量，引用的动态库…">
   
     <link rel="alternative" href="/atom.xml" title="Eugene&#39;s blog" type="application/atom+xml">
   
@@ -177,53 +178,122 @@
 	</div>
 </nav>
 
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-APK分析工具：ClassyShark" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/08/08/Sources-for-Android-API-xx-Platfrom-not-found/" class="archive-article-date">
-  	<time datetime="2016-08-08T08:28:19.000Z" itemprop="datePublished">8月 8</time>
+    <div class="article-meta">
+      <a href="/2016/08/09/APK分析工具：ClassyShark/" class="article-date">
+  	<time datetime="2016-08-09T03:34:29.000Z" itemprop="datePublished">2016-08-09</time>
 </a>
-        </div>
-    	 
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/08/08/Sources-for-Android-API-xx-Platfrom-not-found/">Sources for Android API xx Platfrom not found</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      APK分析工具：ClassyShark
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android-studio/">android studio</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ClassyShark/">ClassyShark</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apk反编译/">apk反编译</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/google/">google</a></li></ul>
 	</div>
 
-          
+        
 
-        </div>
         <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
+      </div>
+      
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>ClassyShark是一款可以查看Android可执行文件的浏览工具，支持APK,Aar,So,Dex,Jar,Class等文件.另外还统计了方法数量，dex数量，引用的动态库…<a id="more"></a></p>
+<p>##发现缘由</p>
+<ul>
+<li><p>曾经的我们开发一个应用，几个类，几张图片，打包出来也就几十几百kb。现在动辄成百上千个类，还有一堆的第三方库，之后就有人的项目出现了这样的错误：<code>java.lang.IllegalArgumentException: method ID not in [0, 0xffff]: 65536</code> ；你的应用中的Dex文件方法数超过了最大值65536的上限，瞬间懵B。我项目都要上线了，你告诉我dex方法超了(有什么东西可以统计dex中的方法呢)。@%￥#@%￥…(早期可没有分包这一说)。</p>
+</li>
+<li><p>有时候我们会想观摩下大厂的开发架构是如何的，用了那些优秀的库呢 ？直接apk解压也能看，但是效果不好，很多都是模糊的。反编译能看的更丰富些，但是步骤不少啊，虽然有现成的工具。(想看源码就算了，-，- 混淆是必须的)</p>
+</li>
+<li><p>等等</p>
+</li>
+</ul>
+<p>##ClassyShark</p>
+<p>忘记是在哪里看到一篇推荐使用ClassyShark的文章了( &gt;_&lt; 原谅我记性不好)，不过记得里面拿美团的应用做了分析。非常感谢分享！</p>
+<p>第一眼看到ClassyShark就被吸引了，简洁，方便，实用。分析apk跟使用文件浏览器一样，目录结构，方法数量，还可以使用图表的方式显示结构…</p>
+<p>具体使用效果大家可以看这里<a href="https://github.com/borisf/classyshark-user-guide" target="_blank" rel="external">classyshark-user-guide</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/08/08/Sources-for-Android-API-xx-Platfrom-not-found/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Sources for Android API xx Platfrom not found</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="APK分析工具：ClassyShark" data-title="APK分析工具：ClassyShark" data-url="http://yring.cn/2016/08/09/APK分析工具：ClassyShark/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 </div>
       <footer id="footer">
@@ -249,9 +319,9 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false
 	}
