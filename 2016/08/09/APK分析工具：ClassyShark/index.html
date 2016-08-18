@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://yring.cn/2016/08/09/APK分析工具：ClassyShark/index.html">
 <meta property="og:site_name" content="Eugene's blog">
 <meta property="og:description" content="ClassyShark是一款可以查看Android可执行文件的浏览工具，支持APK,Aar,So,Dex,Jar,Class等文件.另外还统计了方法数量，dex数量，引用的动态库…">
-<meta property="og:updated_time" content="2016-08-09T07:30:50.000Z">
+<meta property="og:updated_time" content="2016-08-18T02:10:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="APK分析工具：ClassyShark">
 <meta name="twitter:description" content="ClassyShark是一款可以查看Android可执行文件的浏览工具，支持APK,Aar,So,Dex,Jar,Class等文件.另外还统计了方法数量，dex数量，引用的动态库…">
@@ -216,8 +216,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>ClassyShark是一款可以查看Android可执行文件的浏览工具，支持APK,Aar,So,Dex,Jar,Class等文件.另外还统计了方法数量，dex数量，引用的动态库…<a id="more"></a></p>
-<p>##发现缘由</p>
-<ul>
+<h2 id="发现缘由"><a href="#发现缘由" class="headerlink" title="发现缘由"></a>发现缘由</h2><ul>
 <li><p>曾经的我们开发一个应用，几个类，几张图片，打包出来也就几十几百kb。现在动辄成百上千个类，还有一堆的第三方库，之后就有人的项目出现了这样的错误：<code>java.lang.IllegalArgumentException: method ID not in [0, 0xffff]: 65536</code> ；你的应用中的Dex文件方法数超过了最大值65536的上限，瞬间懵B。我项目都要上线了，你告诉我dex方法超了(有什么东西可以统计dex中的方法呢)。@%￥#@%￥…(早期可没有分包这一说)。</p>
 </li>
 <li><p>有时候我们会想观摩下大厂的开发架构是如何的，用了那些优秀的库呢 ？直接apk解压也能看，但是效果不好，很多都是模糊的。反编译能看的更丰富些，但是步骤不少啊，虽然有现成的工具。(想看源码就算了，-，- 混淆是必须的)</p>
@@ -225,8 +224,7 @@
 <li><p>等等</p>
 </li>
 </ul>
-<p>##ClassyShark</p>
-<p>忘记是在哪里看到一篇推荐使用ClassyShark的文章了( &gt;_&lt; 原谅我记性不好)，不过记得里面拿美团的应用做了分析。非常感谢分享！</p>
+<h2 id="ClassyShark"><a href="#ClassyShark" class="headerlink" title="ClassyShark"></a>ClassyShark</h2><p>忘记是在哪里看到一篇推荐使用ClassyShark的文章了( &gt;_&lt; 原谅我记性不好)，不过记得里面拿美团的应用做了分析。非常感谢分享！</p>
 <p>第一眼看到ClassyShark就被吸引了，简洁，方便，实用。分析apk跟使用文件浏览器一样，目录结构，方法数量，还可以使用图表的方式显示结构…</p>
 <p>具体使用效果大家可以看这里<a href="https://github.com/borisf/classyshark-user-guide" target="_blank" rel="external">classyshark-user-guide</a></p>
 
